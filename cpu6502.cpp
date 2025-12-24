@@ -230,7 +230,7 @@ void Cpu6502::CLD(int8_t instruction){
 }
 
 void Cpu6502::CLI(int8_t instruction){
-    this->P &= 0b11111011; 
+    this->P &= 0b11111011; vscode
     this->pc++;
 }
 
@@ -274,7 +274,15 @@ void Cpu6502::DEY(int8_t instruction){
 }
 
 void Cpu6502::EOR(int8_t instruction){
+    int8_t add;
+    int8_t args = getValueFromAAAAdressing(instruction, &add);
+    int8_t nx   = objC["aaa"][add]; // verificando na tabela de enderecamento quantos bytes sao recebidos por argumento
 
+    this->A ^= args;
+
+    ///TODO: reg de status
+
+    this->pc += nx ; // atualizando o PC para a posição depois dos argumentos
 }
 
 void Cpu6502::INC(int8_t instruction){
@@ -300,7 +308,15 @@ void Cpu6502::JSR(int8_t instruction){
 }
 
 void Cpu6502::LDA(int8_t instruction){
+    int8_t add;
+    int8_t args = getValueFromAAAAdressing(instruction, &add);
+    int8_t nx   = objC["aaa"][add]; // verificando na tabela de enderecamento quantos bytes sao recebidos por argumento
 
+    this->A = args;
+
+    ///TODO: registrado de status
+
+    this->pc += nx ; // atualizando o PC para a posição depois dos argumentos
 }
 
 void Cpu6502::LDX(int8_t instruction){
@@ -320,7 +336,15 @@ void Cpu6502::NOP(int8_t instruction){
 }
 
 void Cpu6502::ORA(int8_t instruction){
+    int8_t add;
+    int8_t args = getValueFromAAAAdressing(instruction, &add);
+    int8_t nx   = objC["aaa"][add]; // verificando na tabela de enderecamento quantos bytes sao recebidos por argumento
 
+    this->A |= args;
+
+    ///TODO: registrado de status
+
+    this->pc += nx ; // atualizando o PC para a posição depois dos argumentos
 }
 
 void Cpu6502::PHA(int8_t instruction){
@@ -376,7 +400,15 @@ void Cpu6502::RTS(int8_t instruction){
 }
 
 void Cpu6502::SBC(int8_t instruction){
+    int8_t add;
+    int8_t args = getValueFromAAAAdressing(instruction, &add);
+    int8_t nx   = objC["aaa"][add]; // verificando na tabela de enderecamento quantos bytes sao recebidos por argumento
 
+    this->A += args;
+
+    ///TODO: registrado de status
+
+    this->pc += nx ; // atualizando o PC para a posição depois dos argumentos
 }
 
 void Cpu6502::SEC(int8_t instruction){
@@ -402,7 +434,7 @@ void Cpu6502::STX(int8_t instruction){
 
 }
 
-void Cpu6502::STY(int8_t instruction){
+void Cpu6502::STY(int8_t instructvscodeion){
 
 }
 
